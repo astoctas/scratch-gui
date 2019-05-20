@@ -46,6 +46,11 @@ import gdxforInsetIconURL from './gdxfor/gdxfor-small.svg';
 import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
+
+import InterfazImage from './interfaz/interfaz.png';
+import InterfazButtonImage from './interfaz/interfaz-small.png';
+
+
 export default [
     {
         name: (
@@ -317,5 +322,25 @@ export default [
             />
         ),
         helpLink: 'https://scratch.mit.edu/vernier'
-    }
+    },
+    {
+        name: 'Interfaz Robótica',
+        extensionId: 'interfaz',
+        collaborator: 'NH',
+        iconURL: InterfazImage,
+        insetIconURL: InterfazButtonImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Interfaz Robótica."
+                description="interfaz robótica"
+                id="gui.extension.interfaz.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        internetConnectionRequired: true,
+        bluetoothRequired: false,
+        helpLink: 'https://interfazrobotica.com.ar/scratch'
+
+    }    
 ];
