@@ -64,7 +64,7 @@ class ExtensionLibrary extends React.PureComponent {
         );
     }
 }
-
+ 
 ExtensionLibrary.propTypes = {
     intl: intlShape.isRequired,
     onCategorySelected: PropTypes.func,

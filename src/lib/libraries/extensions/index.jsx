@@ -325,7 +325,7 @@ export default [
     },
     {
         name: 'Interfaz Robótica',
-        extensionId: 'interfaz',
+        extensionId: 'interfaz', 
         collaborator: 'NH',
         iconURL: InterfazImage,
         insetIconURL: InterfazButtonImage,
@@ -336,11 +336,6 @@ export default [
                 id="gui.extension.interfaz.description"
             />
         ),
-        featured: true,
-        disabled: false,
-        internetConnectionRequired: true,
-        bluetoothRequired: false,
-        helpLink: 'https://interfazrobotica.com.ar/scratch'
-
+        featured: true
     }    
 ];
