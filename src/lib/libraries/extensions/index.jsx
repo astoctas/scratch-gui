@@ -156,6 +156,7 @@ export default [
         featured: true,
         internetConnectionRequired: true
     },
+    /*** 
     {
         name: 'Makey Makey',
         extensionId: 'makeymakey',
@@ -323,10 +324,11 @@ export default [
         ),
         helpLink: 'https://scratch.mit.edu/vernier'
     },
+    ******/
     {
         name: 'Interfaz Robótica',
         extensionId: 'interfaz', 
-        collaborator: 'NH',
+        collaborator: 'Northern Hills',
         iconURL: InterfazImage,
         insetIconURL: InterfazButtonImage,
         description: (
