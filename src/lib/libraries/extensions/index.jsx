@@ -333,7 +333,7 @@ export default [
         insetIconURL: InterfazButtonImage,
         description: (
             <FormattedMessage
-                defaultMessage="Interfaz Robótica."
+                defaultMessage="Conecta con tus proyectos"
                 description="interfaz robótica"
                 id="gui.extension.interfaz.description"
             />
