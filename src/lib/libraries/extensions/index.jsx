@@ -46,6 +46,11 @@ import gdxforInsetIconURL from './gdxfor/gdxfor-small.svg';
 import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
+
+import InterfazImage from './interfaz/interfaz.png';
+import InterfazButtonImage from './interfaz/interfaz-small.png';
+
+
 export default [
     {
         name: (
@@ -151,6 +156,7 @@ export default [
         featured: true,
         internetConnectionRequired: true
     },
+    /*** 
     {
         name: 'Makey Makey',
         extensionId: 'makeymakey',
@@ -317,5 +323,21 @@ export default [
             />
         ),
         helpLink: 'https://scratch.mit.edu/vernier'
-    }
+    },
+    ******/
+    {
+        name: 'Interfaz Robótica',
+        extensionId: 'interfaz', 
+        collaborator: 'Northern Hills',
+        iconURL: InterfazImage,
+        insetIconURL: InterfazButtonImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Conecta con tus proyectos"
+                description="interfaz robótica"
+                id="gui.extension.interfaz.description"
+            />
+        ),
+        featured: true
+    }    
 ];
