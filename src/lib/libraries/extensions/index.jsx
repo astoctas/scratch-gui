@@ -49,6 +49,10 @@ import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
 import InterfazImage from './interfaz/interfaz.png';
 import InterfazButtonImage from './interfaz/interfaz-small.png';
+import RastiImage from './rasti/rasti.png';
+import RastiButtonImage from './rasti/rasti-small.png';
+import I2CImage from './i2c/i2c.png';
+import I2CButtonImage from './i2c/i2c-small.png';
 
 
 export default [
@@ -339,5 +343,36 @@ export default [
             />
         ),
         featured: true
-    }    
+    },
+    {
+        name: 'Rasti Robótica',
+        extensionId: 'rasti', 
+        collaborator: 'Northern Hills',
+        iconURL: RastiImage,
+        insetIconURL: RastiButtonImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Rasti"
+                description="rasti robótica"
+                id="gui.extension.rasti.description"
+            />
+        ),
+        featured: true
+    },
+    {
+        name: 'Robótica I2C',
+        extensionId: 'i2c', 
+        collaborator: 'Northern Hills',
+        iconURL: I2CImage,
+        insetIconURL: I2CButtonImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="I2C"
+                description="robótica i2c"
+                id="gui.extension.i2c.description"
+            />
+        ),
+        featured: true
+    }
+
 ];
