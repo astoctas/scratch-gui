@@ -1,9 +1,6 @@
 # scratch-gui
 #### Scratch GUI is a set of React components that comprise the interface for creating and running Scratch 3.0 projects
 
-[![Build Status](https://travis-ci.com/LLK/scratch-gui.svg?token=Yfq2ryN1BwaxDME69Lnc&branch=master)](https://travis-ci.com/LLK/scratch-gui)
-[![Greenkeeper badge](https://badges.greenkeeper.io/LLK/scratch-gui.svg)](https://greenkeeper.io/)
-
 ## Installation
 This requires you to have Git and Node.js installed.
 
@@ -17,6 +14,8 @@ git clone https://github.com/LLK/scratch-gui.git
 cd scratch-gui
 npm install
 ```
+
+**You may want to add `--depth=1` to the `git clone` command because there are some [large files in the git repository history](https://github.com/LLK/scratch-gui/issues/5140).**
 
 ## Getting started
 Running the project requires Node.js to be installed.
@@ -49,7 +48,7 @@ Here's how to link your local `scratch-gui` code to another project's `node_modu
 2. From the top level of each repository (such as `scratch-www`) that depends on `scratch-gui`:
     1. Make sure you have run `npm install`
     2. Run `npm link scratch-gui`
-    3. Build or run the repositoriy
+    3. Build or run the repository
 
 #### Using `npm run watch`
 
@@ -58,7 +57,7 @@ Instead of `BUILD_MODE=dist npm run build`, you can use `BUILD_MODE=dist npm run
 #### Oh no! It didn't work!
 
 If you can't get linking to work right, try:
-* Follow the recipe above step by step and don't change the order. It is especially important to run `npm install` _before_ `npm link`, because installing after the linking will reset the linking.
+* Follow the recipe above step by step and don't change the order. It is especially important to run `npm install` _before_ `npm link` as installing after the linking will reset the linking.
 * Make sure the repositories are siblings on your machine's file tree, like `.../.../MY_SCRATCH_DEV_DIRECTORY/scratch-gui/` and `.../.../MY_SCRATCH_DEV_DIRECTORY/scratch-www/`.
 * Consistent node.js version: If you have multiple Terminal tabs or windows open for the different Scratch repositories, make sure to use the same node version in all of them.
 * If nothing else works, unlink the repositories by running `npm unlink` in both, and start over.
@@ -72,9 +71,9 @@ See [jest cli docs](https://facebook.github.io/jest/docs/en/cli.html#content) fo
 
 ### Running tests
 
-*NOTE: If you're a windows user, please run these scripts in Windows `cmd.exe`  instead of Git Bash/MINGW64.*
+*NOTE: If you're a Windows user, please run these scripts in Windows `cmd.exe`  instead of Git Bash/MINGW64.*
 
-Before running any test, make sure you have run `npm install` from this (scratch-gui) repository's top level.
+Before running any tests, make sure you have run `npm install` from this (scratch-gui) repository's top level.
 
 #### Main testing command
 
@@ -103,7 +102,7 @@ $(npm bin)/jest --runInBand test/unit/components/button.test.jsx
 
 #### Running integration tests
 
-Integration tests use a headless browser to manipulate the actual html and javascript that the repo
+Integration tests use a headless browser to manipulate the actual HTML and javascript that the repo
 produces. You will not see this activity (though you can hear it when sounds are played!).
 
 Note that integration tests require you to first create a build that can be loaded in a browser:
@@ -134,7 +133,7 @@ USE_HEADLESS=no $(npm bin)/jest --runInBand test/integration/backpack.test.js
 
 ### Ignoring optional dependencies
 
-When running `npm install`, you can get warnings about optionsl dependencies:
+When running `npm install`, you can get warnings about optional dependencies:
 
 ```
 npm WARN optional Skipping failed optional dependency /chokidar/fsevents:
@@ -151,7 +150,7 @@ Further reading: [Stack Overflow](https://stackoverflow.com/questions/36725181/n
 
 ### Resolving dependencies
 
-When installing for the first time, you can get warnings which need to be resolved:
+When installing for the first time, you can get warnings that need to be resolved:
 
 ```
 npm WARN eslint-config-scratch@5.0.0 requires a peer of babel-eslint@^8.0.1 but none was installed.
@@ -166,7 +165,7 @@ You can check which versions are available:
 npm view react-intl-redux@0.* version
 ```
 
-You will neet do install the required version:
+You will need to install the required version:
 
 ```
 npm install  --no-optional --save-dev react-intl-redux@^0.7
@@ -189,10 +188,72 @@ npm install  --no-optional --save-dev react-responsive@^5.0.0
 
 Further reading: [Stack Overflow](https://stackoverflow.com/questions/46602286/npm-requires-a-peer-of-but-all-peers-are-in-package-json-and-node-modules)
 
+## Troubleshooting
+
+If you run into npm install errors, try these steps:
+1. run `npm cache clean --force`
+2. Delete the node_modules directory
+3. Delete package-lock.json
+4. run `npm install` again
 
 ## Publishing to GitHub Pages
 You can publish the GUI to github.io so that others on the Internet can view it.
 [Read the wiki for a step-by-step guide.](https://github.com/LLK/scratch-gui/wiki/Publishing-to-GitHub-Pages)
+
+## Understanding the project state machine
+
+Since so much code throughout scratch-gui depends on the state of the project, which goes through many different phases of loading, displaying and saving, we created a "finite state machine" to make it clear which state it is in at any moment. This is contained in the file src/reducers/project-state.js .
+
+It can be hard to understand the code in src/reducers/project-state.js . There are several types of data and functions used, which relate to each other:
+
+### Loading states
+
+These include state constant strings like:
+
+* `NOT_LOADED` (the default state),
+* `ERROR`,
+* `FETCHING_WITH_ID`,
+* `LOADING_VM_WITH_ID`,
+* `REMIXING`,
+* `SHOWING_WITH_ID`,
+* `SHOWING_WITHOUT_ID`,
+* etc.
+
+### Transitions
+
+These are names for the action which causes a state change. Some examples are:
+
+* `START_FETCHING_NEW`,
+* `DONE_FETCHING_WITH_ID`,
+* `DONE_LOADING_VM_WITH_ID`,
+* `SET_PROJECT_ID`,
+* `START_AUTO_UPDATING`,
+
+### How transitions relate to loading states
+
+Like this diagram of the project state machine shows, various transition actions can move us from one loading state to another:
+
+![Project state diagram](docs/project_state_diagram.svg)
+
+_Note: for clarity, the diagram above excludes states and transitions relating to error handling._
+
+#### Example
+
+Here's an example of how states transition.
+
+Suppose a user clicks on a project, and the page starts to load with URL https://scratch.mit.edu/projects/123456 .
+
+Here's what will happen in the project state machine:
+
+![Project state example](docs/project_state_example.png)
+
+1. When the app first mounts, the project state is `NOT_LOADED`.
+2. The `SET_PROJECT_ID` redux action is dispatched (from src/lib/project-fetcher-hoc.jsx), with `projectId` set to `123456`. This transitions the state from `NOT_LOADED` to `FETCHING_WITH_ID`.
+3. The `FETCHING_WITH_ID` state. In src/lib/project-fetcher-hoc.jsx, the `projectId` value `123456` is used to request the data for that project from the server.
+4. When the server responds with the data, src/lib/project-fetcher-hoc.jsx dispatches the `DONE_FETCHING_WITH_ID` action, with `projectData` set. This transitions the state from `FETCHING_WITH_ID` to `LOADING_VM_WITH_ID`.
+5. The `LOADING_VM_WITH_ID` state. In src/lib/vm-manager-hoc.jsx, we load the `projectData` into Scratch's virtual machine ("the vm").
+6. When loading is done, src/lib/vm-manager-hoc.jsx dispatches the `DONE_LOADING_VM_WITH_ID` action. This transitions the state from `LOADING_VM_WITH_ID` to `SHOWING_WITH_ID`
+7. The `SHOWING_WITH_ID` state. Now the project appears normally and is playable and editable.
 
 ## Donate
 We provide [Scratch](https://scratch.mit.edu) free of charge, and want to keep it that way! Please consider making a [donation](https://secure.donationpay.org/scratchfoundation/) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!
