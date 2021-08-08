@@ -53,6 +53,8 @@ import RastiImage from './rasti/rasti.png';
 import RastiButtonImage from './rasti/rasti-small.png';
 import I2CImage from './i2c/i2c.png';
 import I2CButtonImage from './i2c/i2c-small.png';
+import SocketImage from './socket/socket.png';
+import SocketButtonImage from './socket/socket-small.png';
 
 
 export default [
@@ -370,6 +372,21 @@ export default [
                 defaultMessage="I2C"
                 description="robótica i2c"
                 id="gui.extension.i2c.description"
+            />
+        ),
+        featured: true
+    },
+    {
+        name: 'Socket',
+        extensionId: 'socket', 
+        collaborator: 'Northern Hills',
+        iconURL: SocketImage,
+        insetIconURL: SocketButtonImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Socket"
+                description="robótica socket"
+                id="gui.extension.socket.description"
             />
         ),
         featured: true
