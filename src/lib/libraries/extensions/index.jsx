@@ -377,15 +377,15 @@ export default [
         featured: true
     },
     {
-        name: 'Socket',
+        name: 'Python',
         extensionId: 'socket', 
         collaborator: 'Northern Hills',
         iconURL: SocketImage,
         insetIconURL: SocketButtonImage,
         description: (
             <FormattedMessage
-                defaultMessage="Socket"
-                description="robótica socket"
+                defaultMessage="Python"
+                description="Python socket"
                 id="gui.extension.socket.description"
             />
         ),
