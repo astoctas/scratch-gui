@@ -46,6 +46,15 @@ import gdxforInsetIconURL from './gdxfor/gdxfor-small.svg';
 import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
+
+import InterfazImage from './interfaz/interfaz.png';
+import InterfazButtonImage from './interfaz/interfaz-small.png';
+import RastiImage from './rasti/rasti.png';
+import RastiButtonImage from './rasti/rasti-small.png';
+import I2CImage from './i2c/i2c.png';
+import I2CButtonImage from './i2c/i2c-small.png';
+
+
 export default [
     {
         name: (
@@ -151,6 +160,7 @@ export default [
         featured: true,
         internetConnectionRequired: true
     },
+    /*** 
     {
         name: 'Makey Makey',
         extensionId: 'makeymakey',
@@ -287,5 +297,82 @@ export default [
             />
         ),
         helpLink: 'https://scratch.mit.edu/wedo'
+    },
+    {
+        name: 'Go Direct Force & Acceleration',
+        extensionId: 'gdxfor',
+        collaborator: 'Vernier',
+        iconURL: gdxforIconURL,
+        insetIconURL: gdxforInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Sense push, pull, motion, and spin."
+                description="Description for the Vernier Go Direct Force and Acceleration sensor extension"
+                id="gui.extension.gdxfor.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: true,
+        internetConnectionRequired: true,
+        launchPeripheralConnectionFlow: true,
+        useAutoScan: false,
+        connectionIconURL: gdxforConnectionIconURL,
+        connectionSmallIconURL: gdxforConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their force and acceleration sensor."
+                id="gui.extension.gdxfor.connectingMessage"
+            />
+        ),
+        helpLink: 'https://scratch.mit.edu/vernier'
+    },
+    ******/
+    {
+        name: 'Interfaz Robótica',
+        extensionId: 'interfaz', 
+        collaborator: 'Northern Hills',
+        iconURL: InterfazImage,
+        insetIconURL: InterfazButtonImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Conecta con tus proyectos"
+                description="interfaz robótica"
+                id="gui.extension.interfaz.description"
+            />
+        ),
+        featured: true
+    },
+    {
+        name: 'Rasti Robótica',
+        extensionId: 'rasti', 
+        collaborator: 'Northern Hills',
+        iconURL: RastiImage,
+        insetIconURL: RastiButtonImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="Rasti"
+                description="rasti robótica"
+                id="gui.extension.rasti.description"
+            />
+        ),
+        featured: true
+    },
+    {
+        name: 'Robótica I2C',
+        extensionId: 'i2c', 
+        collaborator: 'Northern Hills',
+        iconURL: I2CImage,
+        insetIconURL: I2CButtonImage,
+        description: (
+            <FormattedMessage
+                defaultMessage="I2C"
+                description="robótica i2c"
+                id="gui.extension.i2c.description"
+            />
+        ),
+        featured: true
     }
+
 ];
